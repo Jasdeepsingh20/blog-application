@@ -9,15 +9,6 @@ const categoryRoute = require('./routes/categories');
 const multer = require('multer');
 const path = require('path');
 
-const cors = require('cors');
-
-// CORS MIDDLEWARE
-app.use(
-    cors({
-        origin: 'https://reverent-beaver-4a1418.netlify.app',
-    })
-);
-
 dotenv.config();
 
 app.use(express.json());
@@ -45,10 +36,6 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 app.post('/api/upload', upload.single('file'), (req, res) => {
     res.status(200).json('File has been uploaded');
-});
-
-app.get('/', (req, res) => {
-    res.send('App deployed');
 });
 
 app.use('/api/auth', authRoute);
